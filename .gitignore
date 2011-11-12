@@ -2,6 +2,7 @@
 *.swo
 *.pyc
 *.mo
+local_settings.py
 *.db
 *.png
 doc/_build

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head-title %}- {% trans "Vote" %}{% endblock %}
+{% block content-title %}{% trans "Vote" %}{% endblock %}
+
+{% block content %}
+<article>
+	<h2>{% trans "Bienvenue sur l'application d'élections du BDE !" %}</h2>
+
+	{% blocktrans %}
+	<p> C'est ici que vous pourrez voter</p>
+	{% endblocktrans %}
+
+	<ul>
+		{% if user.is_authenticated %}
+		<li><a href="{% url vote-bulletin %}">{% trans "voter" %}</a></li>
+		{% endif %}
+
+	</ul>
+</article>
+{% endblock %}
+

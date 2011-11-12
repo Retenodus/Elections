@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+{% load i18n %}
+
+	<head>
+		<meta charset="utf-8" />
+		<title>{% trans "Élections BDE" %}{% block head-title %}{% endblock %}</title>
+
+		<!-- CSS -->
+		<link rel="stylesheet" href="{{ MEDIA_URL }}static/css/reset.css" />
+		<link rel="stylesheet" href="{{ MEDIA_URL }}static/css/style.css" />
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="{{ MEDIA_URL }}static/images/favicon.ico" />
+
+		<!-- JQuery -->
+		<script src="{{ MEDIA_URL}}static/js/jquery.js" type="text/javascript"></script>
+
+		{% if form %}
+		<!-- Form required media -->
+		{{ form.media }}
+		{% endif %}
+
+		<!--
+		Un script pour "activer" HTML5 dans les versions d'IE<9.
+		Pour plus d'informations, voir
+		http://remysharp.com/2009/01/07/html5-enabling-script/
+		-->
+		<!--[if lt IE 9]>
+		<script src="{{ MEDIA_URL }}static/js/ie-html5.js" lang="text/javascript"></script>
+		<![endif]-->
+
+		{% block head-feed %}{% endblock %}
+	</head>
+
+	<body>
+		<header>
+			<hgroup>
+				<h1><img src="{{ MEDIA_URL }}static/images/logo.png" alt="{% trans "Élections BDE" %}" /></h1>
+			</hgroup>
+
+			<nav>
+				<h1>{% trans "Main Menu" %}</h1>
+
+				<ul>
+					{% if user.is_authenticated %}
+					<li><a href="{% url logout %}">{% trans "Log Out" %}</a></li>
+
+					{% else %}
+					<li><a href="{% url login %}">{% trans "Log In" %}</a></li>
+					{% endif %}
+				</ul>
+			</nav>
+		</header>
+
+		<div id="wrapper">
+			<section id="content">
+				<h1>{% block content-title %}{% endblock %}</h1>
+
+				{% block content %}{% endblock %}
+			</section>
+
+			<aside id="sidebar">
+				{% block sidebar %}
+				{% endblock %}
+			</aside>
+		</div>
+
+	{% autoescape off %}
+	{{ piwik_tag }}
+	{% endautoescape %}
+	</body>
+</html>

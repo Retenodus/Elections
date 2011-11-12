@@ -1,0 +1,7 @@
+*.swp
+*.swo
+*.pyc
+*.mo
+*.db
+*.png
+doc/_build

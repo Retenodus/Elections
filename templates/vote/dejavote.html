@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head-title %}- {% trans "Vote" %}{% endblock %}
+{% block content-title %}{% trans "Vote" %}{% endblock %}
+
+{% block content %}
+<article>
+	<h2>{% trans "Bienvenue sur l'application d'élections du BDE !" %}</h2>
+
+	{% blocktrans %}
+	<p> Vous ne pouvez pas voter 2 fois.</p>
+	{% endblocktrans %}
+
+</article>
+{% endblock %}
+

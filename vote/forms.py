@@ -1,6 +1,6 @@
 # vim: fileencoding=utf-8 :
 from django.conf import settings
-from django.forms import Form, ModelForm, RegexField, ModelChoiceField, CharField, EmailField, ValidationError
+from django.forms import Form, ModelForm, RegexField, ModelChoiceField, CharField, EmailField, ValidationError, BooleanField
 from elections.vote.models import Election, Electeur
 
 class BulletinForm(Form):
@@ -11,8 +11,17 @@ class BulletinForm(Form):
 			self.fields["Election_%s" % elect.slug] = ModelChoiceField (
 										label = "%s" % elect.poste, 
 										queryset = Electeur.objects.filter(candidat__poste = elect.poste),
-										empty_label = "(None)", required = True
+										empty_label = "Blanc", required = False
 										)
+		self.fields["Validation"] = BooleanField (
+										label = "JE VALIDE MON VOTE (ACTION IRRÉVERSIBLE) !")
+	
+	def clean_Validation(self):
+		data = self.cleaned_data["Validation"]
+		if not data :
+			raise forms.ValidationError("Vous n'avez pas confirmé votre choix")
+		return data
+
 	
 	def save(self,user):
 		print user
@@ -21,9 +30,10 @@ class BulletinForm(Form):
 		p.save()
 		for name,value in self.cleaned_data.items():
 			if name.startswith("Election_"):
-				elu = Electeur.objects.get(user__username = value)
-				print elu
-				elu.nombre_voix += 1
-				elu.save()
+				if value :
+					elu = Electeur.objects.get(user__username = value)
+					print elu
+					elu.nombre_voix += 1
+					elu.save()
 				#print Electeur.objects.get(user__username = value)[0].nombre_voix
 			

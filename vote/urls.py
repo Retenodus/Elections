@@ -10,4 +10,5 @@ urlpatterns = patterns('',
 	url(r'^bulletin/$', 'elections.vote.views.bulletin', name="vote-bulletin"),
 	url(r'^bulletin/done/$', direct_to_template, {'template': 'vote/vote.html'}, name="vote-avote"),
 	url(r'^bulletin/dejavote/$', direct_to_template, {'template': 'vote/dejavote.html'}, name="vote-dejavote"),
+	url(r'^bulletin/noelection/$', direct_to_template, {'template': 'vote/noelection.html'}, name="vote-noelection"),
 )

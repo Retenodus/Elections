@@ -10,6 +10,8 @@ class Election(models.Model):
 	"""
 	poste = models.CharField(max_length=20, unique = True)
 	slug = models.SlugField(max_length=40, unique = True)
+	active = models.BooleanField(default = False)
+	elus = modems.IntegerField(default = 1)
 
 	def __unicode__(self):
 		return self.poste

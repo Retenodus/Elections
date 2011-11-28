@@ -102,3 +102,5 @@ LOGGING = {
         },
     }
 }
+
+BULLETINS = relpath + "/bulletins/officiels"

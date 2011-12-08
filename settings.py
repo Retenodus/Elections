@@ -103,4 +103,4 @@ LOGGING = {
     }
 }
 
-BULLETINS = relpath + "/bulletins/officiels"
+BULLETINS = relpath + "/bulletins"
